@@ -5,3 +5,5 @@
 [Native interoperability best practices](https://docs.microsoft.com/en-us/dotnet/standard/native-interop/best-practices)
 
 [Default Marshaling for Arrays](https://docs.microsoft.com/en-us/dotnet/framework/interop/default-marshaling-for-arrays)
+
+[Return C++ array to C#](https://stackoverflow.com/questions/17634480/return-c-array-to-c-sharp/18041888)

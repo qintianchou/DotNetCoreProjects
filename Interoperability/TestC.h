@@ -1,12 +1,12 @@
 int Add(int a, int b);
 
-void WriteString(char *content);
+void WriteString(const char *content);
 
 //传入一个整型指针，将其所指向的内容加1
 void AddInt(int *i);
 
 //传入一个整型数组，遍历每一个元素并且输出
-void AddIntArray(int arr[10]);
+void AddIntArray(int *arr, int length);
 
 //在C++中生成一个整型数组，并且数组指针返回给C#
 int* GetArrayFromCPP();

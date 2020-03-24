@@ -7,7 +7,7 @@ int Add(int a, int b)
     return a+b;
 }
 
-void WriteString(char *content)
+void WriteString(const char *content)
 {
     printf("%s\n", content);
 }
@@ -17,13 +17,11 @@ void AddInt(int *i)
     (*i)++;
 }
 
-void AddIntArray(int arr[10])
+void AddIntArray(int *arr, int length)
 {
-    int *currentPointer = &(arr[0]);
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < length; i++)
     {
-        printf("%d", *currentPointer);
-        currentPointer++;
+        printf("%d", arr[i]);
     }
     printf("\n");
 }

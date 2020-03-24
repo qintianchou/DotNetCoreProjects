@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using System.Text;
 
 namespace Interoperability
 {
@@ -28,10 +26,13 @@ namespace Interoperability
         public static extern void AddInt(ref int i);
 
         [DllImport("TestC.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void AddIntArray(int[] arr);
+        public static extern void AddIntArray(int[] arr, int length);
 
         [DllImport("TestC.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int[] GetArrayFromCPP();
+        public static extern IntPtr GetArrayFromCPP();
+
+        [DllImport("TestC.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void ReleaseMemory(IntPtr ptr);
 
         //这里使用CSCallback委托类型来兼容C里的CCallback函数指针
         [DllImport("TestC.dll", CallingConvention = CallingConvention.Cdecl)]
@@ -39,8 +40,6 @@ namespace Interoperability
 
         [DllImport("TestC.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SendStructFromCSToCPP(Vector3 vector);
-
-void ReleaseMemory(int* ptr)
 
         #endregion
 
@@ -72,14 +71,20 @@ void ReleaseMemory(int* ptr)
             {
                 CSArray[iArr] = iArr;
             }
-            AddIntArray(CSArray);
+            AddIntArray(CSArray, CSArray.Length);
 
             //调用C++中的GetArrayFromCPP方法获取一个C中建立的数组
-            int[] pArrayPointer = GetArrayFromCPP();
+            IntPtr pArrayPointer = GetArrayFromCPP();
+            int[] result = new int[10];
+            Marshal.Copy(pArrayPointer, result, 0, 10);
             for (int iArr = 0; iArr < 10; iArr++)
             {
-                Console.WriteLine(pArrayPointer[iArr]);
+                Console.Write(result[iArr]);
             }
+            Console.WriteLine();
+
+            //释放内存
+            ReleaseMemory(pArrayPointer);
 
             //让委托指向将被回调的方法
             callback = CSCallbackFunction;
@@ -92,8 +97,6 @@ void ReleaseMemory(int* ptr)
 
             //将vector传递给C++并在C++中输出
             SendStructFromCSToCPP(vector);
-
-            Console.Read();
         }
     }
 }

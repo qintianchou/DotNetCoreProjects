@@ -1,3 +1,5 @@
 gcc -shared -o TestC.dll TestC.c
 
-cp TestC.dll Interoperability/bin/Debug/netcoreapp3.1
+dotnet build
+
+dotnet Interoperability/bin/Debug/netcoreapp3.1/Interoperability.dll
