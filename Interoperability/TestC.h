@@ -2,6 +2,8 @@ int Add(int a, int b);
 
 void WriteString(const char *content);
 
+const char* ReturnString();
+
 //传入一个整型指针，将其所指向的内容加1
 void AddInt(int *i);
 
@@ -24,4 +26,4 @@ typedef struct Vector3
     float x,y,z;
 }Vector3;
 
-void SendStructFromCSToCPP(Vector3 vector);
+Vector3 SendStructFromCSToCPP(Vector3 vector);
