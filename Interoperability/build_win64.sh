@@ -10,3 +10,4 @@ cd $bin_path
 
 dotnet Interoperability.dll
 
+echo exit code: $?
